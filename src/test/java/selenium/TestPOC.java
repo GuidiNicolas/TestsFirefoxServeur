@@ -28,32 +28,10 @@ public class TestPOC {
     private static ChromeDriverService service;
     static Wait<WebDriver> wait;
 
-	/*
-	
-    @BeforeClass
-    public static void createAndStartService() {
-        service = new ChromeDriverService.Builder()
-                .usingDriverExecutable(new File("/usr/chromedriver/chromedriver"))
-                .usingPort(12778)
-                .build();
-        try {
-            service.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-	
-	*/
-
     @Before
     public void createDriver() {
         System.setProperty("webdriver.gecko.driver", "/usr/firefoxdriver/geckodriver");
         driver = new FirefoxDriver();
-
-        /*
-        driver = new RemoteWebDriver(service.getUrl(),
-                DesiredCapabilities.chrome());
-                */
     }
 
 
@@ -62,12 +40,10 @@ public class TestPOC {
     public void testHibernateJSP() {
         
         wait = new WebDriverWait(driver, 30);
-        driver.get("http://www.google.fr");
-
-        System.out.println(driver.findElement(By.xpath("//div")).toString());
+        driver.get("localhost:8088");
 
         try {
-            driver.findElement(By.xpath("//div"));
+            driver.findElement(By.xpath("//h2"));
         }
         catch (NoSuchElementException e) {
             assertTrue(false);
